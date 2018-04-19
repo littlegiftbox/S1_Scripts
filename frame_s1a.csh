@@ -44,6 +44,7 @@
   if (-f tmprecord)  rm -f tmprecord
 
   # divide the list of files into sets, and create frames based on the given pins
+  # what does it mean by different sets?
   foreach line (`awk '{print $0}' $1`)
     set file1 = `echo $line | awk -F"," '{print $1}'`  # a full path to a .SAFE directory
     set date1 = `echo $file1 | awk '{print substr($1,length($1)-54,8)}'`   # something like 20171201
@@ -200,12 +201,14 @@
   set n1 = ` gdate --date="$date0 - 1 day" +%Y%m%d `
   set n2 = ` gdate --date="$date0 + 1 day" +%Y%m%d `
   if ($SAT0 == "S1A") then
-    python $code_path/get_s1_orbits.py $date0 s1a
+    #python $code_path/get_s1_orbits.py $date0 s1a
     #get_s1a_orbit.csh $date0
+    get_s1a_orbits.csh $date0 S1A
     set orb = ` find . -name "$SAT0*$n1*$n2*.EOF" ` # the name of the file we just copied
   else
-    python $code_path/get_s1_orbits.py $date0 s1b
+    #python $code_path/get_s1_orbits.py $date0 s1b
     #get_s1b_orbit.csh $date0
+    get_s1a_orbits.csh $date0 S1B
     set orb = ` find . -name "$SAT0*$n1*$n2*.EOF" ` # the name of the file we just copied
   endif
 
