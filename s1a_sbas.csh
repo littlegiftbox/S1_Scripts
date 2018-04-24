@@ -10,6 +10,7 @@ rm -f SBAS
 mkdir SBAS
 cd SBAS
 cp ../baseline_table.dat .
+cp ../gauss* .
 rm intf.tab scene.tab
 #
 # based on baseline_table.dat create the intf.tab and scene.tab for sbas
@@ -44,12 +45,12 @@ set ydim = `gmt grdinfo -C ../Merge/${file1}_${file2}/unwrap.grd | awk '{print $
 #
 # run sbas
 #
-sbas intf.tab scene.tab $m $n $xdim $ydim -smooth 1.0 -wavelength 0.0554658 -incidence 30 -range 800184.946186 -rms -dem
+sbas intf.tab scene.tab $m $n $xdim $ydim -smooth 5.0 -wavelength 0.0554658 -incidence 37 -range 800184.946186 -rms -dem
 #
 # project the velocity to Geocooridnates
 #
-#ln -s ../topo/trans.dat .
-#proj_ra2ll.csh trans.dat vel.grd vel_ll.grd
-#gmt grd2cpt vel_ll.grd -T= -Z -Cjet > vel_ll.cpt
-#grd2kml.csh vel_ll vel_ll.cpt
-#cd ..
+ln -s ../Merge/trans.dat .
+proj_ra2ll.csh trans.dat vel.grd vel_ll.grd
+gmt grd2cpt vel_ll.grd -T= -Z -Cjet > vel_ll.cpt
+grd2kml.csh vel_ll vel_ll.cpt
+cd ..
