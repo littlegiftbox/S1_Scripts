@@ -70,7 +70,7 @@ while read p; do
     echo "File exists. Skip downloading process."
   else
     #wget --no-check-certificate --user=kmaterna --password=access_data -O DATA/"$title".SAFE.zip "https://scihub.copernicus.eu/dhus/odata/v1/Products('$uuid')/\$value"
-    wget --no-check-certificate --user=littlegiftbox --password=2Babetterman -O DATA/"$title".SAFE.zip "https://scihub.copernicus.eu/dhus/odata/v1/Products('$uuid')/\$value"
+    wget --no-check-certificate --user=littlegiftbox --password=password -O DATA/"$title".SAFE.zip "https://scihub.copernicus.eu/dhus/odata/v1/Products('$uuid')/\$value"
   # Takes a few hours for each SAFE.zip. 
   # Each one can be unzipped with unzip.
   #   unzip $title.zip
